@@ -36,8 +36,11 @@ $(document).ready(function() {
 	// console.log(modal_title);
 
 	$('img').on('click', function() {
-		var sr = $(this).attr('src');
-		$('#modalBody').attr('src', sr);
+		var image_title = $(this).attr('alt');
+
+		document.getElementById("modalTitle").innerHTML = image_title;
+
+		$('#modalTitle').attr('alt', image_title);
 		$('#myModal').modal('show');
 	});
 
