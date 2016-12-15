@@ -1,47 +1,33 @@
 $(document).ready(function() {
-	// $("#inspire").click(function() {
-	// 	alert("Inspire Clicked")
-	// });
-
-	// $("#management").click(function() {
-	// 	alert("Management Clicked")
-	// });
-
-	// $("#sports").click(function() {
-	// 	alert("Sports Clicked")
-	// });
-
-	// $("#life").click(function() {
-	// 	alert("Life Clicked")
-	// });
-
-	// $("#funny").click(function() {
-	// 	alert("Funny Clicked")
-	// });
-
-	// $("#love").click(function() {
-	// 	alert("Love Clicked")
-	// });
-
-	// $("#art").click(function() {
-	// 	alert("Art Clicked")
-	// });
-
-	// $("#students").click(function() {
-	// 	alert("Students Clicked")
-	// });
-
-	
-	// var modal_title = document.getElementByID('modalTitle');
-	// console.log(modal_title);
-
 	$('img').on('click', function() {
 		var image_title = $(this).attr('alt');
 
 		document.getElementById("modalTitle").innerHTML = image_title;
 
+		var formData = {
+		method: 'getQuote',
+		format: 'json',
+		lang: 'en',
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: 'http://api.forismatic.com/api/1.0/',
+			data: formData, 
+			
+			success: function(newData) {
+				document.getElementById("modalBody").innerHTML = newData["quoteText"];
+				document.getElementById("author").innerHTML = newData["quoteAuthor"];
+
+			},
+			error: function() {
+				alert("something went wrong...!")
+			}
+		});
+
 		$('#modalTitle').attr('alt', image_title);
 		$('#myModal').modal('show');
-	});
+		
+	});	
 
 });
