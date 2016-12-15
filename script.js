@@ -18,6 +18,8 @@ $(document).ready(function() {
 			success: function(newData) {
 				document.getElementById("modalBody").innerHTML = newData["quoteText"];
 				document.getElementById("author").innerHTML = newData["quoteAuthor"];
+				var twitterLink = "https://twitter.com/intent/tweet?text=" + '"' + newData["quoteText"] + '"' + " --" + newData["quoteAuthor"];
+				$(".twitter-share-button").attr("href", twitterLink);
 
 			},
 			error: function() {
